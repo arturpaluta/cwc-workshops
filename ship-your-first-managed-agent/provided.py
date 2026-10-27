@@ -36,11 +36,16 @@ MANAGED_AGENTS_BETA = "managed-agents-2026-04-01"
 
 # Each agent has its own model. Both default to Opus 5.5; set
 # SRE_INVESTIGATOR_MODEL=claude-haiku-5-5 in .env for faster, cheaper threads.
-COMMANDER_MODEL = os.environ.get("SRE_COMMANDER_MODEL", "claude-opus-5-5")
-INVESTIGATOR_MODEL = os.environ.get("SRE_INVESTIGATOR_MODEL", "claude-opus-5-5")
+COMMANDER_MODEL = os.environ.get("SRE_COMMANDER_MODEL", "claude-haiku-5-5")
+INVESTIGATOR_MODEL = os.environ.get("SRE_INVESTIGATOR_MODEL", "claude-haiku-5-5")
 
 COMMANDER_SYSTEM = (PROMPTS / "commander.md").read_text()
 INVESTIGATOR_SYSTEM = (PROMPTS / "investigator.md").read_text()
+
+SYSTEM = "You are the SRE Agent - an SRE/Data-analyst agent embedded in an incidet dashboard." \
+"The application log is mopunted at /mnt/session/uploads/app.log" \
+"You have local tools (get_metrics, get_recent_deploys, det_diff) that query the same data the dashboard shows." \
+"Corelate evidence and state findings plainly and conciesly."
 
 TOOLS = [
     {"type": "agent_toolset_20260401", "default_config": {"enabled": True}},
